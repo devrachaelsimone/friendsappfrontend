@@ -26,7 +26,7 @@ nav ol ul li {
 ICONS 
 ===============
 */
-.icon {
+/* .icon {
   width: 1rem;
   height: 1rem;
   background-color: transparent;
@@ -42,7 +42,7 @@ ICONS
 
 .icon[disabled] {
   visibility: hidden;
-}
+} */
 /*
 =============== 
 ERROR 

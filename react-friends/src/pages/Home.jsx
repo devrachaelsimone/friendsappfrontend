@@ -1,96 +1,58 @@
-import React, { useEffect, useState } from "react";
-import { Table } from "@mui/material";
-import { TableBody } from "@mui/material";
-import { TableCell } from "@mui/material";
-import { TableContainer } from "@mui/material";
-import { TableHead } from "@mui/material";
-import { TableRow } from "@mui/material";
-import { Paper } from "@mui/material";
-import { ButtonGroup } from "@mui/material";
-import { Button } from "@mui/material";
+import React from "react";
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import friendsSlice from "../redux/friend/friendsSlice";
 import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
 
-/* 
-============================================
-MUI 
-============================================
-*/
-
-const useStyledButton = styled("button")(
-  ({ theme }) => `
-  background-color: ${theme.palette.background.paper};
-  box-shadow: ${theme.shadows[1]};
-  border-radius: ${theme.shape.borderRadius}px;
-  padding: ${theme.spacing(2)};
-  min-width: 300px;
+const StyledButton = styled(Button)({
+  backgroundColor: "cornflowerblue",
+  color: "black",
+  boxShadow: "grey",
+  borderRadius: 5,
+  padding: 2,
+  minWidth: 300,
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  "& > *": {
-    margin: theme.spacing(1),
-  },
-`
-);
+});
 
-const StyledTableCell = styled("tablecell")(
-  ({ theme }) => `
+const StyledTableCell = styled(TableCell)({
   head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: "red",
+    color: "white",
   },
   body: {
     fontSize: 14,
   },
-`
-);
+});
 
-const StyledTableRow = styled("row")(
-  ({ theme }) => `
+const StyledTableRow = styled(TableRow)({
   root: {
     "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
+      backgroundColor: "blue",
     },
   },
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-`
-);
-
-/* 
-=========================================
-
-=========================================
-*/
+});
 
 const Home = () => {
-  useDispatch(friendsSlice.actions.addFriend({ name: "John", age: 25 }));
+  // useDispatch(friendsSlice.actions.addFriend({ name: "John", age: 25 }));
 
-  const buttonClasses = useStyledButton();
   return (
     <>
-      <div className={buttonClasses.root}>
-        <Button variant="contained" color="primary">
-          Add User
-        </Button>
+      <div>
+        <StyledButton>Add User</StyledButton>
       </div>
       <TableContainer component={Paper}>
-        <Table  aria-label="customized table">
+        <Table aria-label="customized table">
           <TableHead>
-            <TableRow>
+            <StyledTableRow>
               <StyledTableCell>Name</StyledTableCell>
               <StyledTableCell align="center">Email</StyledTableCell>
               <StyledTableCell align="center">Stream</StyledTableCell>
               <StyledTableCell align="center">Address</StyledTableCell>
               <StyledTableCell align="center">Action</StyledTableCell>
-            </TableRow>
+            </StyledTableRow>
           </TableHead>
           <TableBody></TableBody>
         </Table>

@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <h2>React Full Stack Application using Spring Boot and Redux-Thunk </h2>
       <Routes>
-        <Route exact path="/" component={Home} />
+      <Route path="/" element={<Home />}/>
       </Routes>
     </div>
   );
