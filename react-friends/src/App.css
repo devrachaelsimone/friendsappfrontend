@@ -1,0 +1,101 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Comfortaa";
+  color: white;
+}
+
+nav ol ul li {
+  list-style-type: none;
+}
+
+:root {
+  --info: #17a2b8;
+  --mainBlue: #2a2a72;
+  --greyBackground: #232323;
+  --error: #cc0000;
+  --inputError: #cc0000;
+}
+
+
+/*
+=============== 
+ICONS 
+===============
+*/
+.icon {
+  width: 1rem;
+  height: 1rem;
+  background-color: transparent;
+  border: none;
+  display: grid;
+  place-content: center;
+}
+
+.icon:hover,
+.icon:focus-visible {
+  transform: scale(1.2);
+}
+
+.icon[disabled] {
+  visibility: hidden;
+}
+/*
+=============== 
+ERROR 
+===============
+*/
+
+
+.errmsg{
+  display: inline-block;
+  color: var(--error);
+  padding: 0.25em;
+  margin-bottom: 0.5em;
+}
+
+
+/*
+=============== 
+BODY
+===============
+*/
+
+body {
+  background-color: var(--greyBackground);
+  color: white important!;
+}
+
+hr {
+  background-color: white;
+}
+
+/*
+=============== 
+FONTS
+===============
+*/
+.h1 {
+  color: white;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  letter-spacing: 8px;
+  font-size: 3.5rem;
+}
+.h2 {
+  color: white;
+
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  letter-spacing: 8px;
+  font-size: 2rem;
+}
+
+p{
+  margin-bottom: 0;
+}
