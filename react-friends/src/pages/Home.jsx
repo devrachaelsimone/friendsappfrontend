@@ -1,9 +1,21 @@
 import React from "react";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Button,
+} from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import friendsSlice from "../redux/friend/friendsSlice";
 import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
+import { getFriends } from "../redux/friend/friendsSlice";
+import axios from "axios";
+import { useEffect } from "react";
 
 const StyledButton = styled(Button)({
   backgroundColor: "cornflowerblue",
@@ -36,7 +48,24 @@ const StyledTableRow = styled(TableRow)({
 });
 
 const Home = () => {
-  // useDispatch(friendsSlice.actions.addFriend({ name: "John", age: 25 }));
+  //fetch friend data
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchFriends = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/friends`);
+        dispatch(getFriends(response.data)); // Dispatch the action to update the state
+      } catch (error) {
+        console.error("Error fetching friends in Home:", error);
+      }
+    };
+
+    fetchFriends();
+  }, [dispatch]);
+  //display friend data
+  const {} = useSelector(state => state.data)
 
   return (
     <>

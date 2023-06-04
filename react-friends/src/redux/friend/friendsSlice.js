@@ -4,6 +4,9 @@ const friendsSlice = createSlice({
   name: 'friends',
   initialState: [], 
   reducers: {
+    getFriends: (state, action) => {
+      return action.payload; // get list of friends
+    },
     addFriend: (state, action) => {
       state.push(action.payload);
     },
@@ -25,5 +28,5 @@ const friendsSlice = createSlice({
   },
 });
 
-export const { addFriend, editFriend, deleteFriend } = friendsSlice.actions;
+export const { getFriends,addFriend, editFriend, deleteFriend } = friendsSlice.actions;
 export default friendsSlice.reducer;
