@@ -10,7 +10,7 @@ const middleware = [thunk, logger];
 const store = configureStore({
   reducer: rootReducer,
   middleware,
-  friends: friendsSlice.reducer,
+  friend: friendsSlice.reducer,
   devTools: process.env.NODE_ENV !== "production",
 });
 

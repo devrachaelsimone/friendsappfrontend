@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 function App() {
   return (
     <div className="App">
-      <h2>React Full Stack Application using Spring Boot and Redux-Thunk </h2>
+      <h2>React java spring boot redux toolkit </h2>
       <Routes>
       <Route path="/" element={<Home />}/>
       </Routes>
