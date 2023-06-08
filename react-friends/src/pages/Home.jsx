@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Table,
   TableBody,
@@ -9,6 +8,7 @@ import {
   Paper,
   Button,
   ButtonGroup,
+  Container,
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import friendsSlice from "../redux/friend/friendsSlice";
@@ -17,36 +17,10 @@ import styled from "@emotion/styled";
 import { getFriends } from "../redux/friend/friendsSlice";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-const StyledButton = styled(Button)({
-  backgroundColor: "cornflowerblue",
-  color: "black",
-  boxShadow: "grey",
-  borderRadius: 5,
-  padding: 2,
-  minWidth: 300,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-});
-
-const StyledTableCell = styled(TableCell)({
-  head: {
-    backgroundColor: "red",
-    color: "white",
-  },
-  body: {
-    fontSize: 14,
-  },
-});
-
-const StyledTableRow = styled(TableRow)({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: "blue",
-    },
-  },
-});
+import { StyledButton } from "../styledcomponents/StyledButton";
+import { StyledTableCell } from "../styledcomponents/StyledTableCell";
+import { StyledTableRow } from "../styledcomponents/StyledTableRow";
+import { StyledTable } from "../styledcomponents/StyledTable";
 
 const Home = () => {
   const [loading, setLoading] = useState(true); // Add loading state
@@ -73,76 +47,98 @@ const Home = () => {
 
   //display friend data
   const friends = useSelector((state) => state.friends);
-  console.log(friends); 
+  console.log(friends);
   return (
     <>
-      <div>
-        <StyledButton>Add friend</StyledButton>
-      </div>
-      {loading ? ( // Check if data is still loading
+      {loading ? ( // conditional rendering of loading or table
         <div>Loading...</div>
       ) : (
-        <TableContainer component={Paper}>
-          <Table aria-label="customized table">
-            <TableHead>
-              <StyledTableRow>
-                <StyledTableCell>Name</StyledTableCell>
-                <StyledTableCell align="center">Email</StyledTableCell>
-                <StyledTableCell align="center">Stream</StyledTableCell>
-                <StyledTableCell align="center">Address</StyledTableCell>
-                <StyledTableCell align="center">Action</StyledTableCell>
-              </StyledTableRow>
-            </TableHead>
-            <TableBody>
-            {friends && friends.length > 0 ? (
-                friends.map((friend) => (
-                  <StyledTableRow key={friend.id}>
-                    <StyledTableCell component="th" scope="row">
-                      {friend.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {friend.email}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {friend.stream}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      {friend.address}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">
-                      <div>
-                        <ButtonGroup
-                          variant="contained"
-                          aria-label="friend actions"
-                        >
-                          <Button
-                            color="secondary"
-                            style={{ marginRight: "5px" }}
+        <Container
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            mt: 10,
+            width: "100%",
+          }}
+        >
+          <TableContainer
+            component={Paper}
+            elevation={24}
+            sx={{
+              backgroundColor: "cornflowerblue",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              mx: 0.5,
+              mb: 3,
+            }}
+          >
+            <StyledTable aria-label="customized table">
+              <TableHead>
+                <StyledTableRow>
+                  <StyledTableCell>Name</StyledTableCell>
+                  <StyledTableCell align="center">Email</StyledTableCell>
+                  <StyledTableCell align="center">Stream</StyledTableCell>
+                  <StyledTableCell align="center">Address</StyledTableCell>
+                  <StyledTableCell align="center">Action</StyledTableCell>
+                </StyledTableRow>
+              </TableHead>
+              <TableBody>
+                {friends && friends.length > 0 ? (
+                  friends.map((friend) => (
+                    <StyledTableRow key={friend.id}>
+                      <StyledTableCell component="th" scope="row">
+                        {friend.name}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {friend.email}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {friend.stream}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        {friend.address}
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        <div>
+                          <ButtonGroup
+                            variant="contained"
+                            aria-label="friend actions"
                           >
-                            Delete
-                          </Button>
-                          <Button
-                            color="primary"
-                            style={{ marginRight: "5px" }}
-                          >
-                            Edit
-                          </Button>
-                          <Button>View</Button>
-                        </ButtonGroup>
-                      </div>
+                            <Button
+                              color="secondary"
+                              style={{ marginRight: "5px" }}
+                            >
+                              Delete
+                            </Button>
+                            <Button
+                              color="primary"
+                              style={{ marginRight: "5px" }}
+                            >
+                              Edit
+                            </Button>
+                            <Button>View</Button>
+                          </ButtonGroup>
+                        </div>
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ))
+                ) : (
+                  <StyledTableRow>
+                    <StyledTableCell component="th" scope="row" colSpan={5}>
+                      No friends found.
                     </StyledTableCell>
                   </StyledTableRow>
-                ))
-              ) : (
-                <StyledTableRow>
-                  <StyledTableCell component="th" scope="row" colSpan={5}>
-                    No friends found.
-                  </StyledTableCell>
-                </StyledTableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                )}
+              </TableBody>
+            </StyledTable>
+          </TableContainer>
+          <div>
+            <StyledButton>Add friend</StyledButton>
+          </div>
+        </Container>
       )}
     </>
   );
