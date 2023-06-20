@@ -5,7 +5,7 @@ import { Container } from "@mui/material";
 import { StyledButton } from "../styledcomponents/StyledButton";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { addFriend } from "../redux/friend/friendsSlice";
+import { addFriend, getFriends } from "../redux/friend/friendsSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 //todo  there is no form validation//
@@ -30,6 +30,7 @@ const AddFriend = () => {
       setError("please fill all input fields");
     } else {
       dispatch(addFriend(state));
+      dispatch(getFriends(state));
       setError("");
       navigate("/");
     }

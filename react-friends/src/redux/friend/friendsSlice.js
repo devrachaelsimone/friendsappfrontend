@@ -9,12 +9,16 @@ const friendsSlice = createSlice({
       return action.payload; // get list of friends
     },
 
-
     addFriend: async (state, action, friend) => {
       try {
-        const response = axios.post(`${process.env.REACT_APP_API_URL}/friends`, action.payload, friend, state); //posting to api/db
+        const response = axios.post(
+          `${process.env.REACT_APP_API_URL}/friends`,
+          action.payload,
+          friend,
+          state
+        ); //posting to api/db
         const newFriendState = response.data;
-        console.log(response.data)
+        console.log(response.data);
         return [...state, newFriendState];
       } catch (error) {
         console.log(error);
@@ -22,7 +26,7 @@ const friendsSlice = createSlice({
       }
     },
 
-/* 
+    /* 
     editFriend: (state, action) => {
       const { id, name, address, stream, email } = action.payload;
       const friend = state.find((friend) => friend.id === id);
@@ -40,7 +44,5 @@ const friendsSlice = createSlice({
   },
 });
 
-export const { getFriends, addFriend} =
-  friendsSlice.actions;
+export const { getFriends, addFriend } = friendsSlice.actions;
 export default friendsSlice.reducer;
-
