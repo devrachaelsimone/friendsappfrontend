@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import friendsSlice from "../redux/friend/friendsSlice";
-import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
 import { getFriends } from "../redux/friend/friendsSlice";
 import axios from "axios";
@@ -21,8 +20,11 @@ import { StyledButton } from "../styledcomponents/StyledButton";
 import { StyledTableCell } from "../styledcomponents/StyledTableCell";
 import { StyledTableRow } from "../styledcomponents/StyledTableRow";
 import { StyledTable } from "../styledcomponents/StyledTable";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  //let history = useHistory()
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true); // Add loading state
 
   //fetch friend data
@@ -45,7 +47,7 @@ const Home = () => {
     fetchFriends();
   }, [dispatch]);
 
-  //display friend data
+  //display friend data and update state
   const friends = useSelector((state) => state.friends);
   console.log(friends);
   return (
@@ -107,19 +109,20 @@ const Home = () => {
                             variant="contained"
                             aria-label="friend actions"
                           >
+                            <Button>View</Button>
+                            <Button
+                              color="primary"
+                              style={{ marginRight: "5px" }}
+                            >
+                              {" "}
+                              Edit{" "}
+                            </Button>
                             <Button
                               color="secondary"
                               style={{ marginRight: "5px" }}
                             >
                               Delete
                             </Button>
-                            <Button
-                              color="primary"
-                              style={{ marginRight: "5px" }}
-                            >
-                              Edit
-                            </Button>
-                            <Button>View</Button>
                           </ButtonGroup>
                         </div>
                       </StyledTableCell>
@@ -136,7 +139,9 @@ const Home = () => {
             </StyledTable>
           </TableContainer>
           <div>
-            <StyledButton>Add friend</StyledButton>
+            <StyledButton onClick={() => navigate("/addfriend")}>
+              Add friend
+            </StyledButton>
           </div>
         </Container>
       )}
