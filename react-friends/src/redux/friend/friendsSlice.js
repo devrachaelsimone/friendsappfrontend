@@ -25,6 +25,22 @@ const friendsSlice = createSlice({
         return state;
       }
     },
+    deleteFriend: async (state, action, friend, id) => {
+      try {
+        const response = axios.post(
+          `${process.env.REACT_APP_API_URL}/friend/{id}`,
+          action.payload,
+          friend,
+          state
+        ); //DELETE from api/db
+        const newFriendState = response.data;
+        console.log("deleteFriend friendsSlice");
+        return [...state, newFriendState];
+      } catch (error) {
+        console.log(error);
+        return state;
+      }
+    },
 
     /* 
     editFriend: (state, action) => {
@@ -37,10 +53,7 @@ const friendsSlice = createSlice({
         friend.email = email;
       }
     },
-    deleteFriend: (state, action) => {
-      const id = action.payload;
-      return state.filter((friend) => friend.id !== id);
-    }, */
+    */
   },
 });
 
