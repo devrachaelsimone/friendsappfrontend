@@ -8,53 +8,24 @@ import {
   Paper,
   Button,
   ButtonGroup,
+  Container,
 } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "@emotion/styled";
+import { getFriends } from "../redux/friend/friendsSlice"; //redux
+import { useEffect, useState } from "react";
+import { StyledButton } from "../styledcomponents/StyledButton";
 import { StyledTableCell } from "../styledcomponents/StyledTableCell";
 import { StyledTableRow } from "../styledcomponents/StyledTableRow";
 import { StyledTable } from "../styledcomponents/StyledTable";
-
-
-
-
-
-
-
-
-
-
-
-import { Container } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
-import { StyledButton } from "../styledcomponents/StyledButton";
-import FriendTable from "../components/FriendTable";
 import { useNavigate } from "react-router-dom";
-import useFetchFriends from "../api/fetchFriends";
 
-const Home = () => {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(true); // Add loading state
+const FriendTable = () => {
   const friends = useSelector((state) => state.friends);
-  useFetchFriends();
-
+  console.log(friends)
+  
   return (
-    <>
-     {/*  {friends.length === 0 ? ( //check if friends are loaded
-        <div>Loading...</div>
-      ) : ( */}
-        <Container
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            mt: 10,
-            width: "100%",
-          }}
-        >
-          {/*  <FriendTable friends={friends}/>  */}
-          <TableContainer
+    <TableContainer
       component={Paper}
       elevation={24}
       sx={{
@@ -120,18 +91,7 @@ const Home = () => {
         </TableBody>
       </StyledTable>
     </TableContainer>
-
-          <div>
-            <StyledButton onClick={() => navigate("/addfriend")}>
-              Add friend
-            </StyledButton>
-          </div>
-        </Container>
-    {/*   )} */}
-    </>
   );
 };
 
-export default Home;
-
-
+export default FriendTable;
