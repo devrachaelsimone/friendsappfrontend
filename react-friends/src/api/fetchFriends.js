@@ -5,8 +5,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 const apiUrl = process.env.REACT_APP_API_URL;
 
-
-
 const fetchFriends = async () => {
   try {
     const response = await axios.get(`${apiUrl}/friends`);
