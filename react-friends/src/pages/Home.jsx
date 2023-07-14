@@ -27,9 +27,9 @@ const Home = () => {
 
   return (
     <>
-      {/*  {friends.length === 0 ? ( //check if friends are loaded
+        {friends.length === 0 ? ( //check if friends are loaded
         <div>Loading...</div>
-      ) : ( */}
+      ) : ( 
       <Container
         sx={{
           display: "flex",
@@ -49,7 +49,7 @@ const Home = () => {
           </StyledButton>
         </div>
       </Container>
-      {/*   )} */}
+      )} 
     </>
   );
 };
