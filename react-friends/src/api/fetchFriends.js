@@ -8,6 +8,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
 const fetchFriends = async () => {
   try {
     const response = await axios.get(`${apiUrl}/friends`);
+    console.log("SUCCESSFULLY RAN FETCHFRIENDSJS")
     return response.data;
   } catch (error) {
     console.error("Error fetching friends:", error);

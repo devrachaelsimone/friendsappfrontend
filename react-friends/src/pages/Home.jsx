@@ -1,18 +1,5 @@
-import {
-  TableBody,
-  TableContainer,
-  TableHead,
-  Paper,
-  Button,
-  ButtonGroup,
-} from "@mui/material";
-import { StyledTableCell } from "../styledcomponents/StyledTableCell";
-import { StyledTableRow } from "../styledcomponents/StyledTableRow";
-import { StyledTable } from "../styledcomponents/StyledTable";
-
 import { Container } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { StyledButton } from "../styledcomponents/StyledButton";
 import FriendTable from "../components/FriendTable";
@@ -27,29 +14,27 @@ const Home = () => {
 
   return (
     <>
-        {friends.length === 0 ? ( //check if friends are loaded
+      {friends.length === 0 ? ( //check if friends are loaded
         <div>Loading...</div>
-      ) : ( 
-      <Container
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          mt: 10,
-          width: "100%",
-        }}
-      >
-         <FriendTable friends={friends}/>  
-       
-
-        <div>
-          <StyledButton onClick={() => navigate("/addfriend")}>
-            Add friend
-          </StyledButton>
-        </div>
-      </Container>
-      )} 
+      ) : (
+        <Container
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            mt: 10,
+            width: "100%",
+          }}
+        >
+          <FriendTable friends={friends} />
+          <div>
+            <StyledButton onClick={() => navigate("/addfriend")}>
+              Add friend
+            </StyledButton>
+          </div>
+        </Container>
+      )}
     </>
   );
 };

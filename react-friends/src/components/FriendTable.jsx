@@ -1,14 +1,10 @@
 import {
-  Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
-  TableRow,
   Paper,
   Button,
   ButtonGroup,
-  Container,
 } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "@emotion/styled";
@@ -22,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 const FriendTable = () => {
   const friends = useSelector((state) => state.friends);
-  console.log(friends)
+  //console.log(friends)
   
   return (
     <TableContainer
