@@ -17,9 +17,9 @@ const friendsSlice = createSlice({
           friend,
           state
         ); //posting to api/db
-        const newFriendState = response.data;
+        state = response.data;
         console.log(response.data);
-        return [...state, newFriendState];
+        return [...state];
       } catch (error) {
         console.log(error);
         return state;
