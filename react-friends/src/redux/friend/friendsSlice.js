@@ -12,7 +12,6 @@ export const getFriendsThunk = createAsyncThunk("friends", async () => {
 });
 
 
-
 /* =========================== SLICE ============================= */
 const friendsSlice = createSlice({
   name: "friends",
@@ -26,7 +25,9 @@ const friendsSlice = createSlice({
       state.addFriend = action.payload;
     },
     getFriends: (state, action) => {
-      state.friends = action.payload;
+      //state.friends = action.payload;
+      return action.payload
+
     },
   },
 });

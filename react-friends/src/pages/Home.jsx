@@ -31,9 +31,10 @@ const Home = () => {
 
   //1. grab the data with dispatch
   useEffect(() => {
-    dispatch(getFriendsThunk());
-    console.log(friends);
-  }, [dispatch]); // Include dispatch as a dependency
+    dispatch(getFriendsThunk()).then((friend) => {
+      dispatch(getFriends(friend));
+    });
+  }, [dispatch]);
 
  
 
