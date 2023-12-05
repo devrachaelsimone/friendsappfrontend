@@ -4,19 +4,22 @@ import { useEffect, useState } from "react";
 import { StyledButton } from "../styledcomponents/StyledButton";
 import FriendTable from "../components/FriendTable";
 import { useNavigate } from "react-router-dom";
-import useFetchFriends from "../api/fetchFriends";
+import { getFriends, getFriendsThunk } from "../redux/friend/friendsSlice";
+import Loading from "../components/Loading.jsx"
 
 const Home = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true); // Add loading state
   const friends = useSelector((state) => state.friends);
-  useFetchFriends();
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    // Fetch the list of friends when the component mounts or whenever needed
+    dispatch(getFriendsThunk, getFriends());
+  }, []);
+  
   return (
     <>
-      {friends.length === 0 ? ( //check if friends are loaded
-        <div>Loading...</div>
-      ) : (
         <Container
           sx={{
             display: "flex",
@@ -27,14 +30,14 @@ const Home = () => {
             width: "100%",
           }}
         >
-          <FriendTable friends={friends} />
+          <h2>this is home</h2>
+          <FriendTable/>
           <div>
             <StyledButton onClick={() => navigate("/addfriend")}>
               Add friend
             </StyledButton>
           </div>
         </Container>
-      )}
     </>
   );
 };

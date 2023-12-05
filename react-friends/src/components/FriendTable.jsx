@@ -6,19 +6,31 @@ import {
   Button,
   ButtonGroup,
 } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
 import styled from "@emotion/styled";
-import { getFriends } from "../redux/friend/friendsSlice"; //redux
 import { useEffect, useState } from "react";
 import { StyledButton } from "../styledcomponents/StyledButton";
 import { StyledTableCell } from "../styledcomponents/StyledTableCell";
 import { StyledTableRow } from "../styledcomponents/StyledTableRow";
 import { StyledTable } from "../styledcomponents/StyledTable";
-import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getFriendsThunk, getFriends } from "../redux/friend/friendsSlice"; // Import your actions
+import Loading from "./Loading";
+
 
 const FriendTable = () => {
-  const friends = useSelector((state) => state.friends);
-  //console.log(friends)
+  //1. grab the data with dispatch
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getFriendsThunk, getFriends());
+  }, [dispatch]);
+
+  //define the various friends states
+  const { friends, loading } = useSelector((state) => ({ ...state.friends }));
+  const error = useSelector((state) => state.friends.error);
+
+  if (loading) {
+    return <Loading />;
+  }
   
   return (
     <TableContainer
@@ -45,9 +57,10 @@ const FriendTable = () => {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {friends && friends.length > 0 ? (
+           {friends && friends.length > 0 ? ( 
             friends.map((friend) => (
-              <StyledTableRow key={friend.id}>
+              <StyledTableRow key={friend.id}
+              >
                 <StyledTableCell component="th" scope="row">
                   {friend.name}
                 </StyledTableCell>
@@ -69,7 +82,8 @@ const FriendTable = () => {
                         {" "}
                         Edit{" "}
                       </Button>
-                      <Button color="secondary" style={{ marginRight: "5px" }}>
+                      <Button 
+                      color="secondary" style={{ marginRight: "5px" }}>
                         Delete
                       </Button>
                     </ButtonGroup>

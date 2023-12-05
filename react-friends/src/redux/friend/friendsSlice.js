@@ -1,61 +1,57 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+/* =========================== THUNKS ============================= */
+export const getFriendsThunk = createAsyncThunk("friends", async () => {
+  try {
+    const response = axios.get(`${process.env.REACT_APP_API_URL}/friends`);
+    console.log("API Response:", response.data)
+    return response.data;
+  } catch (err) {
+    return err.response.data;
+  }
+});
 
+//create thunk
+
+//update/edit thunk
+
+//delete thunk
+
+/* =========================== SLICE ============================= */
 const friendsSlice = createSlice({
   name: "friends",
-  initialState: [],
+  initialState: {
+    friends: [],
+    loading: false,
+    error: null,
+  },
   reducers: {
+    addFriend: (state, action) => {
+      state.addFriend = action.payload;
+    },
     getFriends: (state, action) => {
-      return action.payload; // get list of friends
+      state.friends = action.payload;
     },
-
-    addFriend: async (state, action, friend) => {
-      try {
-        const response = axios.post(
-          `${process.env.REACT_APP_API_URL}/friends`,
-          action.payload,
-          friend,
-          state
-        ); //posting to api/db
-        state = response.data;
-        console.log(response.data);
-        return [...state];
-      } catch (error) {
-        console.log(error);
-        return state;
-      }
-    },
-    deleteFriend: async (state, action, friend, id) => {
-      try {
-        const response = axios.post(
-          `${process.env.REACT_APP_API_URL}/friend/{id}`,
-          action.payload,
-          friend,
-          state
-        ); //DELETE from api/db
-        const newFriendState = response.data;
-        console.log("deleteFriend friendsSlice");
-        return [...state, newFriendState];
-      } catch (error) {
-        console.log(error);
-        return state;
-      }
-    },
-
-    /* 
-    editFriend: (state, action) => {
-      const { id, name, address, stream, email } = action.payload;
-      const friend = state.find((friend) => friend.id === id);
-      if (friend) {
-        friend.name = name;
-        friend.address = address;
-        friend.stream = stream;
-        friend.email = email;
-      }
-    },
-    */
+  },
+  extraReducers: {
+    //================================================== get actions
+      [getFriendsThunk.pending]: (state) => {
+        state.loading = true;
+        state.error = null;
+      },
+      [getFriendsThunk.fulfilled]: (state, action) => {
+        state.loading = false;
+        state.friends = action.payload;
+      },
+      [getFriendsThunk.rejected]: (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      },
+    //==============================================================
   },
 });
 
-export const { getFriends, addFriend } = friendsSlice.actions;
+//export const { getFriends, addFriend, deleteFriend } = friendsSlice.actions;
+export const { addFriend, getFriends } = friendsSlice.actions;
+
 export default friendsSlice.reducer;

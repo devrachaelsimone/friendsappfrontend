@@ -5,47 +5,48 @@ import { Container } from "@mui/material";
 import { StyledButton } from "../styledcomponents/StyledButton";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { addFriend, getFriends } from "../redux/friend/friendsSlice";
+import { getFriends, addFriend } from "../redux/friend/friendsSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 //todo  there is no form validation//
+//1. set initial state to null
+const initialState = {
+  name: "",
+  address: "",
+  email: "",
+  stream: "",
+};
+
 const AddFriend = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [friendData, setFriendData] = useState(initialState); //set initial friend data
 
-  //1. set initial state to null
-  const [state, setState] = useState({
-    name: "",
-    address: "",
-    email: "",
-    stream: "",
-  });
+  //2.define starting friend data
+  const { name, address, email, stream } = friendData;
 
-  //5. handle friend submission
+  //3. handle friend submission
   const handleAddFriend = (e) => {
-    console.log("frien aded");
     e.preventDefault();
-    if (!state.name || !state.email || !state.address || !state.stream) {
-      setError("please fill all input fields");
+    if (name && address && email && stream) {
+      const updatedFriendData = { ...friendData };
+      //const updatedFriendData = { ...friendData, name: user?.result?.name };
+      dispatch(addFriend({ updatedFriendData })); //add friend action
+      dispatch(getFriends({ updatedFriendData, navigate })); //get friend action
     } else {
-      dispatch(addFriend(state));
-      dispatch(getFriends(state));
-      setError("");
-      navigate("/");
+      console.log("please fill out all fields");
     }
+    //handleClear();
+    navigate("/");
+    setError("");
   };
 
-  //2. handle state change
+  //4. handle input fields change
   const handleInputChange = (e) => {
     let { name, value } = e.target; //updating name and value props with the input
-    setState({ ...state, [name]: value });
+    setFriendData({ ...friendData, [name]: value });
   };
-
-  //3. set the new state
-  const { name, address, stream, email } = state;
-
-  //4. update the state for each text field using the onChange and value props, as well as name
 
   return (
     <>
@@ -78,7 +79,8 @@ const AddFriend = () => {
             label="Name"
             variant="outlined"
             name="name"
-            value={state.name}
+            value={friendData.name}
+            /* value={state.name} */
             onChange={handleInputChange}
             type="text"
           />
@@ -88,7 +90,7 @@ const AddFriend = () => {
             label="Address"
             variant="outlined"
             name="address"
-            value={state.address}
+            value={friendData.address}
             onChange={handleInputChange}
             type="text"
           />
@@ -98,7 +100,7 @@ const AddFriend = () => {
             label="Email"
             variant="outlined"
             name="email"
-            value={state.email}
+            value={friendData.email}
             onChange={handleInputChange}
             type="email"
           />
@@ -107,7 +109,7 @@ const AddFriend = () => {
             label="Stream"
             variant="outlined"
             name="stream"
-            value={state.stream}
+            value={friendData.stream}
             onChange={handleInputChange}
             type="text"
           />
@@ -127,5 +129,3 @@ const AddFriend = () => {
 };
 
 export default AddFriend;
-
-
