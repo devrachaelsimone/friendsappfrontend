@@ -11,29 +11,34 @@ export const getFriendsThunk = createAsyncThunk("friends", async () => {
   }
 });
 
-
 /* =========================== SLICE ============================= */
 const friendsSlice = createSlice({
   name: "friends",
   initialState: {
     friends: [],
-    loading: false,
+    loading: true,
     error: null,
   },
   reducers: {
-    addFriend: (state, action) => {
+  /*   addFriend: (state, action) => {
       state.addFriend = action.payload;
-    },
+    }, */
+   /*  getFriends: (state, action) => {
+      // Ensure action.payload is always an array
+      state.friends = Array.isArray(action.payload)
+        ? action.payload
+        : Object.values(action.payload);
+    }, */
     getFriends: (state, action) => {
-      //state.friends = action.payload;
-      return action.payload
+      state.friends = action.payload
+      console.log(action.payload, "action.payload")
 
     },
   },
 });
 
 //export const { getFriends, addFriend, deleteFriend } = friendsSlice.actions;
-export const { addFriend, getFriends } = friendsSlice.actions;
+export const { getFriends } = friendsSlice.actions;
 
 export default friendsSlice.reducer;
 
