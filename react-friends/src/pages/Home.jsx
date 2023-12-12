@@ -1,10 +1,105 @@
 import { Container } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+
+import { StyledButton } from "../styledcomponents/StyledButton";
+import FriendTable from "../components/FriendTable";
+
+
+const Home = ({friends}) => {
+  return (
+    <>
+      <Container
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          mt: 10,
+          width: "100%",
+        }}
+      >
+        <h2>this is home</h2>
+
+        <FriendTable friends = {friends}/>
+      </Container>
+    </>
+  );
+};
+
+export default Home;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* import { Container } from "@mui/material";
 import { useEffect, useState } from "react";
+
 import { StyledButton } from "../styledcomponents/StyledButton";
 import FriendTable from "../components/FriendTable";
 import { useNavigate } from "react-router-dom";
-import { getFriends, getFriendsThunk } from "../redux/friend/friendsSlice";
+
 import {
   TableBody,
   TableContainer,
@@ -17,26 +112,9 @@ import styled from "@emotion/styled";
 import { StyledTableCell } from "../styledcomponents/StyledTableCell";
 import { StyledTableRow } from "../styledcomponents/StyledTableRow";
 import { StyledTable } from "../styledcomponents/StyledTable";
-import Loading from "../components/Loading.jsx"
+import Loading from "../components/Loading.jsx";
 
-const Home = () => {
-  const dispatch = useDispatch();
-  const friends = useSelector((state) => state.friends);
-
-
-  useEffect(() => {
-    dispatch(getFriendsThunk()).then((friend) => {
-      dispatch(getFriends(friend));
-      console.log('Type of friends:', typeof friends);
-      console.log('Type of friend:', typeof friend); 
-
-    });
-  }, [dispatch]);
-  /* const dataArray = Object.values(friends);
-  console.log('Type of friend:', typeof friends); */
-
-
-
+const Home = ({ friends }) => {
   return (
     <>
       <Container
@@ -74,31 +152,36 @@ const Home = () => {
               </StyledTableRow>
             </TableHead>
             <TableBody>
-              {
-                friends.map((friend) => (
-                  <StyledTableRow key={friend.id}>
-                    <StyledTableCell component="th" scope="row">
-                      {friend.name}
-                    </StyledTableCell>
-                    <StyledTableCell align="center">{friend.email}</StyledTableCell>
-                    <StyledTableCell align="center">{friend.stream}</StyledTableCell>
-                    <StyledTableCell align="center">{friend.address}</StyledTableCell>
-                    <StyledTableCell align="center">
-                      <ButtonGroup variant="contained" aria-label="friend actions">
-                        <Button>View</Button>
-                        <Button color="primary" style={{ marginRight: "5px" }}>
-                          Edit
-                        </Button>
-                        <Button 
-                        color="secondary" style={{ marginRight: "5px" }}>
-                          Delete
-                        </Button>
-                      </ButtonGroup>
-                    </StyledTableCell>
-                  </StyledTableRow>
-                )
-              
-              )}
+              {friends.map((friend) => (
+                <StyledTableRow key={friend.id}>
+                  <StyledTableCell component="th" scope="row">
+                    {friend.name}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    {friend.email}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    {friend.stream}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    {friend.address}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <ButtonGroup
+                      variant="contained"
+                      aria-label="friend actions"
+                    >
+                      <Button>View</Button>
+                      <Button color="primary" style={{ marginRight: "5px" }}>
+                        Edit
+                      </Button>
+                      <Button color="secondary" style={{ marginRight: "5px" }}>
+                        Delete
+                      </Button>
+                    </ButtonGroup>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
             </TableBody>
           </StyledTable>
         </TableContainer>
@@ -108,4 +191,4 @@ const Home = () => {
 };
 
 export default Home;
-
+ */

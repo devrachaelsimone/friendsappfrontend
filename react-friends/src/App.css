@@ -6,7 +6,10 @@
   box-sizing: border-box;
   font-family: "Comfortaa";
   color: white;
+  background-color: black;
+
 }
+
 
 nav ol ul li {
   list-style-type: none;
@@ -66,19 +69,18 @@ BODY
 
 body {
   background-color: var(--greyBackground);
-  color: white important!;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-hr {
-  background-color: white;
-}
 
 /*
 =============== 
 FONTS
 ===============
 */
-.h1 {
+h1 {
   color: white;
   display: flex;
   text-align: center;
@@ -86,7 +88,7 @@ FONTS
   letter-spacing: 8px;
   font-size: 3.5rem;
 }
-.h2 {
+h2 {
   color: white;
 
   display: flex;
