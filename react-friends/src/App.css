@@ -6,7 +6,6 @@
   box-sizing: border-box;
   font-family: "Comfortaa";
   color: white;
-  background-color: black;
 
 }
 
@@ -72,6 +71,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+/*   background-color: black;
+ */
 }
 
 

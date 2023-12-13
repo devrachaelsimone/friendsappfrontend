@@ -27,6 +27,7 @@ function App() {
   return (
     <div className="App">
       <h2>React java spring boot redux toolkit </h2>
+
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home friends={friends} />}></Route>
