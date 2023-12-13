@@ -24,6 +24,12 @@ function App() {
       console.log(err);
     }
   };
+
+  const updateFriendsList = () => {
+    // Function to update the friends list
+    getFriends();
+  };
+
   return (
     <div className="App">
       <h2>React java spring boot redux toolkit </h2>
@@ -32,7 +38,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Home friends={friends} />}></Route>
           <Route path="/home" element={<Home friends={friends} />}></Route>
-          <Route path="/addfriend" element={<AddFriend />} />
+          <Route path="/addfriend" element={<AddFriend updateFriendsList={updateFriendsList} />} />
         </Route>
       </Routes>
     </div>

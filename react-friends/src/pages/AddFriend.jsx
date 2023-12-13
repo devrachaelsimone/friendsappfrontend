@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 //todo  there is no form validation//
-const AddFriend = () => {
+const AddFriend = ({ updateFriendsList }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -25,6 +25,8 @@ const AddFriend = () => {
     try {
       e.preventDefault();
       await axios.post("http://localhost:8080/api/v1/friends", friend);
+      updateFriendsList();
+
       navigate("/");
 
     } catch (error) {

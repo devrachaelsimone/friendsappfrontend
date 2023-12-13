@@ -4,6 +4,7 @@ import { StyledButton } from "../styledcomponents/StyledButton";
 import FriendTable from "../components/FriendTable";
 import { Navigate, useNavigate } from "react-router-dom";
 import AddFriend from "./AddFriend";
+
 const Home = ({ friends }) => {
   const navigate = useNavigate();
   return (
